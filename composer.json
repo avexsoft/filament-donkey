@@ -1,0 +1,58 @@
+{
+    "name": "avexsoft/filament-donkey",
+    "description": "The smart-ass Filament plugin to manage `config()` in production",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "avexsoft"
+        }
+    ],
+    "homepage": "https://github.com/avexsoft/filament-donkey",
+    "keywords": [
+        "Laravel",
+        "FilamentDonkey"
+    ],
+    "require": {
+        "composer/installers": "^2.3",
+        "filament/filament": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Avexsoft\\FilamentDonkey\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Avexsoft\\FilamentDonkey\\Tests\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Avexsoft\\FilamentDonkey\\FilamentDonkeyServiceProvider"
+            ],
+            "aliases": {
+                "FilamentDonkey": "Avexsoft\\FilamentDonkey\\Facades\\FilamentDonkey"
+            }
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../"
+        }
+    ],
+    "scripts": {
+        "post-autoload-dump": [
+            "@php vendor/bin/testbench package:discover --ansi"
+        ]
+    },
+    "type": "laravel-library",
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}
