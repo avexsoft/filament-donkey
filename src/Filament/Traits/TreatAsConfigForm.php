@@ -2,7 +2,7 @@
 
 namespace Avexsoft\FilamentDonkey\Filament\Traits;
 
-use Avexsoft\Donkey\Models\Donkey;
+use Avexsoft\Donkey\Models\Override;
 use Illuminate\Support\Str;
 
 trait TreatAsConfigForm
@@ -28,7 +28,7 @@ trait TreatAsConfigForm
     {
         foreach ($keys as $key => $value) {
             if ($value !== null) {
-                Donkey::updateOrCreate(['key' => $this->colonToDot($key)], [
+                Override::updateOrCreate(['key' => $this->colonToDot($key)], [
                     'value' => $value,
                 ]);
             }
