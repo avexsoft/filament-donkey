@@ -6,20 +6,12 @@ use Orchestra\Testbench\TestCase as Testbench;
 
 abstract class TestbenchTestCase extends Testbench
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-    }
+    protected $enablesPackageDiscoveries = true;
 
     protected function getPackageProviders($app): array
     {
         return [
-            \Avexsoft\FilamentDonkey\FilamentDonkeyServiceProvider::class,
+            TestPanelProvider::class,
         ];
     }
 }
