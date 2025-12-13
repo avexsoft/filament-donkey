@@ -32,7 +32,7 @@ class FilamentDonkeyServiceProvider extends ServiceProvider
 
         // Register the service the package provides.
         $this->app->singleton('filament-donkey', function ($app) {
-            return new FilamentDonkey;
+            return new FilamentDonkey();
         });
     }
 

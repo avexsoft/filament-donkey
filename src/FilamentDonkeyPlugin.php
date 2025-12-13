@@ -21,7 +21,7 @@ implements Plugin
     {
         $class = get_called_class();
 
-        return new $class;
+        return new $class();
     }
 
     public function getId(): string
@@ -29,7 +29,9 @@ implements Plugin
         return 'filament-donkey';
     }
 
-    public function boot(Panel $panel): void {}
+    public function boot(Panel $panel): void
+    {
+    }
 
     public function register(Panel $panel): void
     {
