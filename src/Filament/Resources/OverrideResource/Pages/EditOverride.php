@@ -1,14 +1,14 @@
 <?php
 
-namespace Avexsoft\FilamentDonkey\Filament\Resources\DonkeyResource\Pages;
+namespace Avexsoft\FilamentDonkey\Filament\Resources\OverrideResource\Pages;
 
-use Avexsoft\FilamentDonkey\Filament\Resources\DonkeyResource;
+use Avexsoft\FilamentDonkey\Filament\Resources\OverrideResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditConfig extends EditRecord
+class EditOverride extends EditRecord
 {
-    protected static string $resource = DonkeyResource::class;
+    protected static string $resource = OverrideResource::class;
 
     protected function getHeaderActions(): array
     {

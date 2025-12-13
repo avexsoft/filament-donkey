@@ -1,15 +1,15 @@
 <?php
 
-namespace Avexsoft\FilamentDonkey\Filament\Resources\DonkeyResource\Pages;
+namespace Avexsoft\FilamentDonkey\Filament\Resources\OverrideResource\Pages;
 
-use Avexsoft\FilamentDonkey\Filament\Resources\DonkeyResource;
+use Avexsoft\FilamentDonkey\Filament\Resources\OverrideResource;
 use Exception;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateConfig extends CreateRecord
+class CreateOverride extends CreateRecord
 {
-    protected static string $resource = DonkeyResource::class;
+    protected static string $resource = OverrideResource::class;
 
     protected function getFormActions(): array
     {

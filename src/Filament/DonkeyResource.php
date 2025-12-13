@@ -3,9 +3,9 @@
 namespace Avexsoft\FilamentDonkey\Filament;
 
 use Avexsoft\FilamentDonkey\FilamentDonkeyPlugin;
-use Avexsoft\FilamentEx\Filament\Resources\CommonResource;
+use Filament\Resources\Resource;
 
-class DonkeyResource extends CommonResource
+abstract class DonkeyResource extends Resource
 {
     protected static ?string $plugin = FilamentDonkeyPlugin::class;
 }

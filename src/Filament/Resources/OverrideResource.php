@@ -2,9 +2,9 @@
 
 namespace Avexsoft\FilamentDonkey\Filament\Resources;
 
-use Avexsoft\Donkey\Models\Donkey;
-use Avexsoft\FilamentDonkey\Filament\DonkeyResource as _DonkeyResource;
-use Avexsoft\FilamentDonkey\Filament\Resources\DonkeyResource\Pages;
+use Avexsoft\Donkey\Models\Override;
+use Avexsoft\FilamentDonkey\Filament\DonkeyResource;
+use Avexsoft\FilamentDonkey\Filament\Resources\OverrideResource\Pages;
 use BackedEnum;
 use Filament\Forms\Components\CodeEditor;
 use Filament\Forms\Components\CodeEditor\Enums\Language;
@@ -15,9 +15,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
-class DonkeyResource extends _DonkeyResource
+class OverrideResource extends DonkeyResource
 {
-    protected static ?string $model = Donkey::class;
+    protected static ?string $model = Override::class;
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
@@ -30,7 +30,8 @@ class DonkeyResource extends _DonkeyResource
                     ->default(true)
                     ->onColor('success'),
                 Textarea::make('remarks')
-                    ->autosize(),
+                    ->autosize()
+                    ->required(),
                 TextInput::make('key')
                     ->required(),
                 CodeEditor::make('value')
@@ -40,13 +41,13 @@ class DonkeyResource extends _DonkeyResource
 
     public static function table(Table $table): Table
     {
-        return static::tableDefaults($table)
+        return $table
             ->columns([
                 ToggleColumn::make('is_active')
                     ->onColor('success'),
                 TextColumn::make('key')
                     // @TODO how to sanitize $record->key and remarks to prevent malicious HTML?
-                    ->getStateUsing(fn (Donkey $record) => "<div><b>{$record->key}</b></div>{$record->remarks}")
+                    ->getStateUsing(fn (Override $record) => "<div><b>{$record->key}</b></div>{$record->remarks}")
                     ->html(),
                 TextColumn::make('value')
                     ->wrap(),
@@ -74,9 +75,9 @@ class DonkeyResource extends _DonkeyResource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListConfigs::route('/'),
-            'create' => Pages\CreateConfig::route('/create'),
-            'edit'   => Pages\EditConfig::route('/{record}/edit'),
+            'index'  => Pages\ListOverrides::route('/'),
+            'create' => Pages\CreateOverride::route('/create'),
+            'edit'   => Pages\EditOverride::route('/{record}/edit'),
         ];
     }
 }
