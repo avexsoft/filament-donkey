@@ -12,7 +12,7 @@
 
 This plugin allows you to modify your Laravel config() in code/any environment without giving access to the .env file.
 
-[It's a filament ui to leverage this package ](https://github.com/avexsoft/donkey)
+It's a filament ui to leverage this package [Donkey](https://github.com/avexsoft/donkey)
 
 ## Installation
 
