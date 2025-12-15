@@ -6,9 +6,9 @@
 
 # Filament Donkey
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/avexsoft/filament-purl.svg?style=flat-square)](https://packagist.org/packages/avexsoft/filament-purl)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/avexsoft/filament-purl/fix-php-code-style-issues.yml?branch=master&label=code%20style&style=flat-square)](https://github.com/avexsoft/filament-purl/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/avexsoft/filament-purl.svg?style=flat-square)](https://packagist.org/packages/avexsoft/filament-purl)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/avexsoft/filament-donkey.svg?style=flat-square)](https://packagist.org/packages/avexsoft/filament-donkey)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/avexsoft/filament-donkey/fix-php-code-style-issues.yml?branch=master&label=code%20style&style=flat-square)](https://github.com/avexsoft/filament-donkey/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amaster)
+[![Total Downloads](https://img.shields.io/packagist/dt/avexsoft/filament-donkey.svg?style=flat-square)](https://packagist.org/packages/avexsoft/filament-donkey)
 
 This plugin allows you to modify your Laravel config() in code/any environment without giving access to the .env file.
 
