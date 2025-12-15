@@ -21,7 +21,7 @@ implements Plugin
     {
         $class = get_called_class();
 
-        return new $class();
+        return new $class;
     }
 
     public function getId(): string
@@ -29,9 +29,7 @@ implements Plugin
         return 'filament-donkey';
     }
 
-    public function boot(Panel $panel): void
-    {
-    }
+    public function boot(Panel $panel): void {}
 
     public function register(Panel $panel): void
     {
@@ -40,20 +38,17 @@ implements Plugin
 
         if ($this->pages == []) {
             $pagePath = dirname($callerFilename).'/Filament/Pages';
-            $pagePath = realpath($pagePath);
-            $this->pages = array_filter([$namespacePrefix.'\\Filament\\Pages' => ($pagePath)]);
+            $this->pages = array_filter([$namespacePrefix.'\\Filament\\Pages' => realpath($pagePath)]);
         }
 
         if ($this->resources == []) {
             $resourcePath = dirname($callerFilename).'/Filament/Resources';
-            $resourcePath = realpath($resourcePath);
-            $this->resources = array_filter([$namespacePrefix.'\\Filament\\Resources' => $resourcePath]);
+            $this->resources = array_filter([$namespacePrefix.'\\Filament\\Resources' => realpath($resourcePath)]);
         }
 
         if ($this->clusters == []) {
             $clusterPath = dirname($callerFilename).'/Filament/Clusters';
-            $clusterPath = realpath($clusterPath);
-            $this->clusters = array_filter([$namespacePrefix.'\\Filament\\Clusters' => $clusterPath]);
+            $this->clusters = array_filter([$namespacePrefix.'\\Filament\\Clusters' => realpath($clusterPath)]);
         }
 
         $this->registerPages($panel);
