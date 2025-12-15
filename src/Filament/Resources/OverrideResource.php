@@ -30,11 +30,14 @@ class OverrideResource extends DonkeyResource
                     ->default(true)
                     ->onColor('success'),
                 Textarea::make('remarks')
-                    ->autosize()
-                    ->required(),
+                    ->placeholder('Optional comment to help you remember what this key was for')
+                    ->autosize(),
                 TextInput::make('key')
+                    ->label('Config Key')
+                    ->placeholder('The same key used when calling config(...)')
                     ->required(),
                 CodeEditor::make('value')
+                    ->hint('Can be boolean, number, string or JSON')
                     ->language(Language::Json),
             ]);
     }
@@ -75,9 +78,9 @@ class OverrideResource extends DonkeyResource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOverrides::route('/'),
+            'index'  => Pages\ListOverrides::route('/'),
             'create' => Pages\CreateOverride::route('/create'),
-            'edit' => Pages\EditOverride::route('/{record}/edit'),
+            'edit'   => Pages\EditOverride::route('/{record}/edit'),
         ];
     }
 }
