@@ -29,8 +29,12 @@ class OverrideResource extends DonkeyResource
                 Toggle::make('is_active')
                     ->default(true)
                     ->onColor('success'),
+                Toggle::make('is_masked')
+                    ->default(false)
+                    ->onColor('success'),
                 Textarea::make('remarks')
                     ->placeholder('Optional comment to help you remember what this key was for')
+                    ->required()
                     ->autosize(),
                 TextInput::make('key')
                     ->label('Config Key')
@@ -48,6 +52,8 @@ class OverrideResource extends DonkeyResource
             ->columns([
                 ToggleColumn::make('is_active')
                     ->onColor('success'),
+                ToggleColumn::make('is_masked')
+                    ->onColor('success'),
                 TextColumn::make('key')
                     // @TODO how to sanitize $record->key and remarks to prevent malicious HTML?
                     ->getStateUsing(fn (Override $record) => "<div><b>{$record->key}</b></div>{$record->remarks}")
@@ -55,7 +61,8 @@ class OverrideResource extends DonkeyResource
                     ->searchable(),
                 TextColumn::make('value')
                     ->wrap()
-                    ->searchable(),
+                    ->searchable()
+                    ->getStateUsing(fn (Override $record) => $record->is_masked ? str_repeat('*', 8) : $record->value),
 
             ])
             ->filters([
