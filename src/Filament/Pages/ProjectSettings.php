@@ -38,7 +38,7 @@ class ProjectSettings extends Page implements HasActions, HasForms
 
         $data = [
             'app.debug' => filter_var(config('app.debug'), FILTER_VALIDATE_BOOLEAN),
-            'app.name'  => config('app.name'),
+            'app.name' => config('app.name'),
         ];
 
         foreach (array_keys($data) as $key) {
