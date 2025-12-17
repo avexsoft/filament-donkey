@@ -33,23 +33,6 @@ class ProjectSettings extends Page implements HasActions, HasForms
 
     public ?array $data = [];
 
-    public function mount(): void
-    {
-
-        $data = [
-            'app.debug' => filter_var(config('app.debug'), FILTER_VALIDATE_BOOLEAN),
-            'app.name' => config('app.name'),
-        ];
-
-        foreach (array_keys($data) as $key) {
-            $newKey = Str::of($key)->replace('.', ':')->toString();
-            $data[$newKey] = $data[$key];
-            unset($data[$key]);
-        }
-
-        $this->form->fill($data);
-    }
-
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
         return $schema
