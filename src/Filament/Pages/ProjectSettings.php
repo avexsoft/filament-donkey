@@ -2,8 +2,6 @@
 
 namespace Avexsoft\FilamentDonkey\Filament\Pages;
 
-use Avexsoft\Donkey\Facades\Donkey;
-use Avexsoft\Donkey\Models\Override;
 use Avexsoft\FilamentDonkey\Filament\Forms\Components\ConfigTextInput;
 use Avexsoft\FilamentDonkey\Filament\Forms\Components\ConfigToggle;
 use Avexsoft\FilamentDonkey\Filament\Traits\TreatAsConfigForm;
@@ -16,8 +14,6 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Section;
-use Filament\Support\Exceptions\Halt;
-use Illuminate\Support\Str;
 
 class ProjectSettings extends Page implements HasActions, HasForms
 {
@@ -50,18 +46,7 @@ class ProjectSettings extends Page implements HasActions, HasForms
 
     public function save(): void
     {
-        try {
-            $data = $this->form->getState();
-            foreach (array_keys($data) as $key) {
-                $newKey = Str::of($key)->replace(':', '.')->toString();
-                Donkey::set($newKey, $data[$key]);
-
-            }
-
-            app(Override::class)->saveToFile();
-        } catch (Halt $exception) {
-            return;
-        }
+        $this->writeConfig($this->form->getState());
 
         Notification::make()
             ->success()
