@@ -7,11 +7,16 @@ use Illuminate\Support\Str;
 
 trait TreatAsConfigForm
 {
-    public function mutateFormDataBeforeFill(array $data, string $formName, $modelOrArray = null): array
+    public function mount(): void
     {
-        $state = $this->$formName->dehydrateState();
+        $this->form->fill($this->mutateFormDataBeforeFill([]));
+    }
 
-        return $this->readConfig($state['data'][$formName]);
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $state = $this->form->dehydrateState();
+
+        return $this->readConfig($state['data']);
     }
 
     private function readConfig(array $keys): array
