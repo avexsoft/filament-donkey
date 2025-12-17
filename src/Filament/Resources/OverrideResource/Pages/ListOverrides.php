@@ -10,6 +10,8 @@ class ListOverrides extends ListRecords
 {
     protected static string $resource = OverrideResource::class;
 
+    protected ?string $subheading = 'List of config keys that will be overridden';
+
     protected function getHeaderActions(): array
     {
         return [

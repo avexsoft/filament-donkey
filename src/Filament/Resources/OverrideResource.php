@@ -36,7 +36,7 @@ class OverrideResource extends DonkeyResource
                     ->placeholder('Optional comment to help you remember what this key was for')
                     ->autosize(),
                 TextInput::make('key')
-                    ->label('Config Key')
+                    ->label('Config key')
                     ->placeholder('The same key used when calling config(...)')
                     ->required(),
                 CodeEditor::make('value')
@@ -54,6 +54,7 @@ class OverrideResource extends DonkeyResource
                 ToggleColumn::make('is_masked')
                     ->onColor('success'),
                 TextColumn::make('key')
+                    ->label('Config key')
                     // @TODO how to sanitize $record->key and remarks to prevent malicious HTML?
                     ->getStateUsing(fn (Override $record) => "<div><b>{$record->key}</b></div>{$record->remarks}")
                     ->html()
@@ -86,9 +87,9 @@ class OverrideResource extends DonkeyResource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOverrides::route('/'),
+            'index'  => Pages\ListOverrides::route('/'),
             'create' => Pages\CreateOverride::route('/create'),
-            'edit' => Pages\EditOverride::route('/{record}/edit'),
+            'edit'   => Pages\EditOverride::route('/{record}/edit'),
         ];
     }
 }
