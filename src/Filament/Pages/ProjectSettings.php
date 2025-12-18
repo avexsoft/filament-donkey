@@ -4,7 +4,7 @@ namespace Avexsoft\FilamentDonkey\Filament\Pages;
 
 use Avexsoft\FilamentDonkey\Filament\Forms\Components\ConfigTextInput;
 use Avexsoft\FilamentDonkey\Filament\Forms\Components\ConfigToggle;
-use Avexsoft\FilamentDonkey\Filament\Traits\TreatAsConfigForm;
+use Avexsoft\FilamentDonkey\Filament\Traits\AsOneConfigForm;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -17,9 +17,9 @@ use Filament\Schemas\Components\Section;
 
 class ProjectSettings extends Page implements HasActions, HasForms
 {
+    use AsOneConfigForm;
     use InteractsWithActions;
     use InteractsWithForms;
-    use TreatAsConfigForm;
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-document-text';
 

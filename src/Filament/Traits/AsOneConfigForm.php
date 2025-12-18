@@ -5,30 +5,40 @@ namespace Avexsoft\FilamentDonkey\Filament\Traits;
 use Avexsoft\Donkey\Models\Override;
 use Illuminate\Support\Str;
 
-trait TreatAsConfigForm
+trait AsOneConfigForm
 {
-    public function mount(): void
-    {
-        $this->form->fill($this->mutateFormDataBeforeFill([]));
-    }
-
-    protected function mutateFormDataBeforeFill(array $data): array
+    public function mount(null|int|string $record = null): void
     {
         $state = $this->form->dehydrateState();
-
-        return $this->readConfig($state['data']);
+        $data = $this->readConfig($state['data']);
+        $data = $this->mutateFormDataBeforeFill($data);
+        $this->form->fill($data);
     }
 
-    private function readConfig(array $keys): array
+    /**
+     * Overwrite this method if you wish to manipulate `$data` before filling
+     */
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        return $data;
+    }
+
+    /**
+     * Read the values of config keys
+     */
+    private function readConfig(array $pairs): array
     {
         $formData = [];
-        foreach ($keys as $key => $value) {
+        foreach ($pairs as $key => $value) {
             $formData[$key] = config($this->colonToDot($key));
         }
 
         return $formData;
     }
 
+    /**
+     * Write the config values into the database
+     */
     private function writeConfig($keys): void
     {
         foreach ($keys as $key => $value) {
