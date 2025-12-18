@@ -9,9 +9,7 @@ trait AsOneConfigForm
 {
     public function mount(null|int|string $record = null): void
     {
-        $state = $this->form->dehydrateState();
-        $data = $this->readConfig($state['data']);
-        $data = $this->mutateFormDataBeforeFill($data);
+        $data = $this->mutateFormDataBeforeFill($this->readConfigForm());
         $this->form->fill($data);
     }
 
@@ -21,6 +19,13 @@ trait AsOneConfigForm
     protected function mutateFormDataBeforeFill(array $data): array
     {
         return $data;
+    }
+
+    protected function readConfigForm()
+    {
+        $state = $this->form->dehydrateState();
+
+        return $this->readConfig($state['data']);
     }
 
     /**
