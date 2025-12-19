@@ -38,8 +38,10 @@ class ProjectSettings extends Page implements HasActions, HasForms
                     ->aside()
                     ->description('Configuration for APP_xxx')
                     ->schema([
-                        ConfigToggle::make('app.debug'),
-                        ConfigTextInput::make('app.name'),
+                        ConfigTextInput::make('app.name')
+                            ->label('Application name'),
+                        ConfigToggle::make('app.debug')
+                            ->label('Application debug mode'),
                     ]),
             ]);
     }
