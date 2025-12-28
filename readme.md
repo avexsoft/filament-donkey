@@ -39,8 +39,6 @@ Using the power of [Donkey](https://github.com/avexsoft/donkey), this package ma
 
 
 ### Modify Project Settings
-This page allows you to modify project settings using a friendlier ui.
-<img width="1560" height="632" alt="image" src="https://github.com/user-attachments/assets/7974da13-2d24-432d-8235-24cc3cdd240a" />
 
 Build your own custom project page setting using the `ConfigTextInput` and `ConfigToggle`
 ```php
@@ -73,6 +71,9 @@ class ProjectSettings extends ConfigurationPage
 }
 
 ```
+<img width="1560" height="632" alt="image" src="https://github.com/user-attachments/assets/7974da13-2d24-432d-8235-24cc3cdd240a" />
+
+
 
 
 ### Override Config Using UI
