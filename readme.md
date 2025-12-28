@@ -38,18 +38,18 @@ use Avexsoft\FilamentDonkey\FilamentDonkeyPlugin;
 Using the power of [Donkey](https://github.com/avexsoft/donkey), this package make it easier to utilize filament ui conveniency to do such things:
 
 
-1. Modify Project Settings
+### Modify Project Settings
+This page allows you to modify project settings using a friendlier ui.
 <img width="1560" height="632" alt="image" src="https://github.com/user-attachments/assets/7974da13-2d24-432d-8235-24cc3cdd240a" />
-- This page allows you to modify project settings using a friendlier ui.
 
-
-2. Override Config Using UI
-<img width="1570" height="612" alt="image" src="https://github.com/user-attachments/assets/f7458d5a-37d4-41e8-a651-73f8c0fe7d93" />
+### Override Config Using UI
 - This page allows especially developer to add, override or modify config.
 - `Config Key` is the key of the config e.g `app.name`, `app.debug`
 - `Value` will be the desired value of the specific config
 - `Is Masked` will obscured sensitive config fields
 - `Is Active` make it possible to ignore a override config.
+
+<img width="1570" height="612" alt="image" src="https://github.com/user-attachments/assets/f7458d5a-37d4-41e8-a651-73f8c0fe7d93" />
 
 
 
