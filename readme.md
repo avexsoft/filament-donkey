@@ -42,6 +42,39 @@ Using the power of [Donkey](https://github.com/avexsoft/donkey), this package ma
 This page allows you to modify project settings using a friendlier ui.
 <img width="1560" height="632" alt="image" src="https://github.com/user-attachments/assets/7974da13-2d24-432d-8235-24cc3cdd240a" />
 
+Build your own custom project page setting using the `ConfigTextInput` and `ConfigToggle`
+```php
+<?php
+
+namespace Avexsoft\FilamentDonkey\Filament\Pages;
+
+use Avexsoft\FilamentDonkey\Filament\Forms\Components\ConfigTextInput;
+use Avexsoft\FilamentDonkey\Filament\Forms\Components\ConfigToggle;
+use Filament\Schemas\Components\Section;
+
+class ProjectSettings extends ConfigurationPage
+{
+    public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
+    {
+        return $schema
+            ->statePath('data')
+            ->schema([
+                Section::make('Application')
+                    ->aside()
+                    ->description('Configuration for APP_xxx')
+                    ->schema([
+                        ConfigTextInput::make('app.name')
+                            ->label('Application name'),
+                        ConfigToggle::make('app.debug')
+                            ->label('Application debug mode'),
+                    ]),
+            ]);
+    }
+}
+
+```
+
+
 ### Override Config Using UI
 - This page allows especially developer to add, override or modify config.
 - `Config Key` is the key of the config e.g `app.name`, `app.debug`
