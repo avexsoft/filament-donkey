@@ -16,14 +16,14 @@ It's a filament ui to leverage this package [Donkey](https://github.com/avexsoft
 
 ## Installation
 
-You can install the package via composer.
+### Step 1: Install the package via composer.
 
 ```bash
 composer require avexsoft/filament-donkey
 ```
 
-## Usage
-Add in AdminPanelProvider.php
+
+### Step 2: Add in AdminPanelProvider.php
 
 ```php
 use Avexsoft\FilamentDonkey\FilamentDonkeyPlugin;
@@ -32,6 +32,20 @@ use Avexsoft\FilamentDonkey\FilamentDonkeyPlugin;
     FilamentDonkeyPlugin::make(),
 ])
 ```
+
+## Usage
+
+### Project Settings
+<img width="1560" height="632" alt="image" src="https://github.com/user-attachments/assets/7974da13-2d24-432d-8235-24cc3cdd240a" />
+
+
+### Overrides
+<img width="1570" height="612" alt="image" src="https://github.com/user-attachments/assets/f7458d5a-37d4-41e8-a651-73f8c0fe7d93" />
+
+
+<img width="1560" height="447" alt="image" src="https://github.com/user-attachments/assets/16e8cc12-2a36-4568-a0e4-4aa4615e5891" />
+
+
 
 
 ## Changelog
