@@ -14,7 +14,7 @@
     ],
     "require": {
         "composer/installers": "^2.3",
-        "filament/filament": "^4.3.1",
+        "filament/filament": "^4",
         "avexsoft/donkey": "^1"
     },
     "require-dev": {
