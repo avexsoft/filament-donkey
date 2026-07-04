@@ -6,14 +6,20 @@ use Avexsoft\Donkey\Models\Override;
 use Avexsoft\FilamentDonkey\Filament\DonkeyResource;
 use Avexsoft\FilamentDonkey\Filament\Resources\OverrideResource\Pages;
 use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\CodeEditor;
 use Filament\Forms\Components\CodeEditor\Enums\Language;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class OverrideResource extends DonkeyResource
 {
@@ -21,7 +27,19 @@ class OverrideResource extends DonkeyResource
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
-    public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where(fn (Builder $query) => $query->whereNull('value')->orWhere('value', ''))->count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
+
+    protected static \Illuminate\Contracts\Support\Htmlable|string|null $navigationBadgeTooltip = 'Overrides with missing values';
+
+    public static function form(Schema $schema): Schema
     {
         return $schema
             ->columns(1)
@@ -68,12 +86,12 @@ class OverrideResource extends DonkeyResource
             ->filters([
             ])
             ->actions([
-                \Filament\Actions\EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
-                \Filament\Actions\BulkActionGroup::make([
-                    \Filament\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -87,9 +105,9 @@ class OverrideResource extends DonkeyResource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOverrides::route('/'),
+            'index'  => Pages\ListOverrides::route('/'),
             'create' => Pages\CreateOverride::route('/create'),
-            'edit' => Pages\EditOverride::route('/{record}/edit'),
+            'edit'   => Pages\EditOverride::route('/{record}/edit'),
         ];
     }
 }
