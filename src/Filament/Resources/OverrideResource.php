@@ -29,7 +29,9 @@ class OverrideResource extends DonkeyResource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where(fn (Builder $query) => $query->whereNull('value')->orWhere('value', ''))->count();
+        $count = static::getModel()::where(fn (Builder $query) => $query->whereNull('value')->orWhere('value', ''))->count();
+
+        return $count > 0 ? (string) $count : null;
     }
 
     public static function getNavigationBadgeColor(): ?string
