@@ -39,7 +39,7 @@ class OverrideResource extends DonkeyResource
         return 'warning';
     }
 
-    protected static \Illuminate\Contracts\Support\Htmlable|string|null $navigationBadgeTooltip = 'Overrides with missing values';
+    protected static \Illuminate\Contracts\Support\Htmlable|string|null $navigationBadgeTooltip = 'Overrides has missing values';
 
     public static function form(Schema $schema): Schema
     {
@@ -107,9 +107,9 @@ class OverrideResource extends DonkeyResource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOverrides::route('/'),
+            'index'  => Pages\ListOverrides::route('/'),
             'create' => Pages\CreateOverride::route('/create'),
-            'edit' => Pages\EditOverride::route('/{record}/edit'),
+            'edit'   => Pages\EditOverride::route('/{record}/edit'),
         ];
     }
 }
