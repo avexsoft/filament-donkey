@@ -83,6 +83,10 @@ class OverrideResource extends DonkeyResource
                     ->wrap()
                     ->searchable()
                     ->getStateUsing(fn (Override $record) => $record->is_masked ? str_repeat('*', 8) : $record->value),
+                TextColumn::make('original_config_value')
+                    ->wrap()
+                    ->searchable()
+                    ->getStateUsing(fn (Override $record) => $record->is_masked ? str_repeat('*', 8) : $record->original_config_value),
 
             ])
             ->filters([
@@ -107,9 +111,9 @@ class OverrideResource extends DonkeyResource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOverrides::route('/'),
+            'index'  => Pages\ListOverrides::route('/'),
             'create' => Pages\CreateOverride::route('/create'),
-            'edit' => Pages\EditOverride::route('/{record}/edit'),
+            'edit'   => Pages\EditOverride::route('/{record}/edit'),
         ];
     }
 }
