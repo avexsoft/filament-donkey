@@ -111,9 +111,9 @@ class OverrideResource extends DonkeyResource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListOverrides::route('/'),
+            'index' => Pages\ListOverrides::route('/'),
             'create' => Pages\CreateOverride::route('/create'),
-            'edit'   => Pages\EditOverride::route('/{record}/edit'),
+            'edit' => Pages\EditOverride::route('/{record}/edit'),
         ];
     }
 }
