@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectSettings extends ConfigurationPage
 {
+    /**
+     * Path of the uploaded favicon, relative to the branding disk.
+     */
+    private const FAVICON_PATH = 'branding/favicon.svg';
+
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
         return $schema
@@ -28,13 +33,13 @@ class ProjectSettings extends ConfigurationPage
                     ->aside()
                     ->description('Logo used as the browser favicon and in the site header')
                     ->schema([
-                        ConfigFileUpload::make('branding.logo_upload')
+                        ConfigFileUpload::make('app.favicon')
                             ->label('Logo (SVG)')
                             ->helperText('Square SVG, used instead of /favicon.ico. Upload a new file to replace the current logo.')
-                            ->disk(config('branding.disk', 'public'))
-                            ->directory(dirname(config('branding.logo_svg_path', 'branding/logo.svg')))
-                            ->getUploadedFileNameForStorageUsing(fn (): string => basename(config('branding.logo_svg_path', 'branding/logo.svg')))
-                            ->deleteUploadedFileUsing(fn (string $file) => Storage::disk(config('branding.disk', 'public'))->delete($file))
+                            ->disk(self::faviconDisk())
+                            ->directory(dirname(self::FAVICON_PATH))
+                            ->getUploadedFileNameForStorageUsing(fn (): string => basename(self::FAVICON_PATH))
+                            ->deleteUploadedFileUsing(fn (string $file) => Storage::disk(self::faviconDisk())->delete($file))
                             ->acceptedFileTypes(['image/svg+xml'])
                             ->maxSize(512),
                     ]),
@@ -42,17 +47,39 @@ class ProjectSettings extends ConfigurationPage
     }
 
     /**
-     * Show the logo that is already on disk, so the field is not empty on load
-     * and saving the other settings does not wipe the current logo.
+     * Show the favicon that is already on disk, so the field is not empty on
+     * load and saving the other settings does not wipe the current favicon.
      */
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $path = config('branding.logo_svg_path');
+        $path = $this->currentFaviconPath();
 
-        $data['branding:logo_upload'] = ($path && Storage::disk(config('branding.disk', 'public'))->exists($path))
+        $data['app:favicon'] = ($path && Storage::disk(self::faviconDisk())->exists($path))
             ? $path
             : null;
 
         return $data;
+    }
+
+    /**
+     * The stored key is `app.favicon`. The other keys are kept for backwards
+     * compatibility with favicons saved by the first version of this field.
+     */
+    private function currentFaviconPath(): ?string
+    {
+        foreach (['app.favicon', 'branding.logo_upload', 'branding.logo_svg_path'] as $key) {
+            $path = config($key);
+
+            if (filled($path)) {
+                return $path;
+            }
+        }
+
+        return null;
+    }
+
+    private static function faviconDisk(): string
+    {
+        return (string) config('branding.disk', 'public');
     }
 }
