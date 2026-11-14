@@ -62,6 +62,13 @@ class OverrideResource extends DonkeyResource
                 CodeEditor::make('value')
                     ->hint('Can be boolean, number, string or JSON')
                     ->language(Language::Json),
+                Textarea::make('original_config_value')
+                    ->label('Value (.env or config/*.php)')
+                    ->helperText('Read-only. This is the value currently loaded from the environment or config files; it is not saved from this form.')
+                    ->disabled()
+                    ->dehydrated(false)
+                    ->autosize()
+                    ->formatStateUsing(fn ($state, ?Override $record) => $record?->is_masked ? str_repeat('*', 8) : $state),
             ]);
     }
 

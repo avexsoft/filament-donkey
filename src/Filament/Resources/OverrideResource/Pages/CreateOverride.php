@@ -23,6 +23,10 @@ class CreateOverride extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        // `original_config_value` is read-only and is maintained by Donkey
+        // from the environment/config files, never by this form.
+        unset($data['original_config_value']);
+
         return $data;
 
         // @TODO check if this code is required
